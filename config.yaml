@@ -1,0 +1,52 @@
+# Network Based Intrusion Detection System Configuration
+
+# Network Interface Configuration
+network:
+  interface: "eth0"  # Change to your network interface
+  promiscuous_mode: true
+  buffer_size: 65535
+
+# Detection Settings
+detection:
+  # Rule-based detection
+  rules_enabled: true
+  rules_file: "rules/detection_rules.yaml"
+  
+  # Anomaly detection
+  anomaly_enabled: true
+  model_file: "models/anomaly_model.pkl"
+  threshold: 0.8
+  
+  # Traffic analysis
+  analyze_protocols: ["TCP", "UDP", "ICMP"]
+  suspicious_ports: [22, 23, 80, 443, 3389, 1433, 3306]
+  port_scan_threshold: 10  # Number of ports accessed in time window
+  time_window: 60  # seconds
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  log_file: "logs/nids.log"
+  max_file_size: "10MB"
+  backup_count: 5
+  console_output: true
+
+# Alerting Configuration
+alerts:
+  enabled: true
+  log_alerts: true
+  email_alerts: false
+  webhook_url: ""  # Optional webhook for alerts
+  
+# Performance Settings
+performance:
+  packet_buffer_size: 1000
+  processing_threads: 4
+  statistics_interval: 30  # seconds
+
+# Web Dashboard
+dashboard:
+  enabled: true
+  host: "127.0.0.1"
+  port: 8080
+  debug: false
